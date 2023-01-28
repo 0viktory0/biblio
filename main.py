@@ -1,6 +1,7 @@
 import argparse
 import os
 import requests
+import time
 from bs4 import BeautifulSoup
 from pathvalidate import sanitize_filename
 from urllib.parse import urljoin, urlsplit
@@ -93,4 +94,9 @@ if __name__ == '__main__':
             download_image(book['book_img'], img_folder)
         except (requests.HTTPError) as e:
             print('Книга с id = {}, не найдена '.format(book_id))
+            continue
+
+        except (requests.ConnectionError) as e:
+            print('Ошибка подключения. Повторное соединение...')
+            time.sleep(10)
             continue
