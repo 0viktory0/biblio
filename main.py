@@ -7,12 +7,9 @@ from pathvalidate import sanitize_filename
 from urllib.parse import urljoin, urlsplit
 
 
-def donload_txt(book_txt_url, book_id, file_name, folder):
+def download_txt(book_txt_url, book_id, file_name, folder):
     os.makedirs(folder, exist_ok=True)
-    response = requests.get(
-        urljoin(books_url, book_txt_url),
-        params={'id': book_id}
-    )
+    response = requests.get(book_txt_url, params={'id': book_id})
     response.raise_for_status()
     check_for_redirect(response)
     sanitized_filename = sanitize_filename(f'{file_name}_{book_id}')
@@ -90,7 +87,7 @@ if __name__ == '__main__':
             response.raise_for_status()
             check_for_redirect(response)
             book = parse_book_page(response)
-            donload_txt(book_txt_url, book_id, book['book_name'], book_folder)
+            download_txt(book_txt_url, book_id, book['book_name'], book_folder)
             download_image(book['book_img'], img_folder)
         except (requests.HTTPError) as e:
             print('Книга с id = {}, не найдена '.format(book_id))
