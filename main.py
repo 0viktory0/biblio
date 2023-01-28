@@ -72,8 +72,8 @@ if __name__ == '__main__':
     books_url = 'https://tululu.org'
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--start_id", type=int, default=1)
-    parser.add_argument("--end_id", type=int, default=10)
+    parser.add_argument("--start_id", type=int, default=1, help='Book id to start download')
+    parser.add_argument("--end_id", type=int, default=10, help='Book id to end download')
     args = parser.parse_args()
 
     end_id = args.end_id + 1
