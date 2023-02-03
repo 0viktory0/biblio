@@ -14,14 +14,14 @@ pip install -r requirements.txt
 $ python имя_скрипта.py
 ```
 
-# parse_tululu.py
+### parse_tululu.py
 Скрипт скачает первые 10 книг с id 1 по 10.
 Можно задать свой промежуток, указав его при запуске.
 ```
 $ python parse_tululu.py --start_id=3 --end_id=10
 ```
 
-# parse_tululu_category.py
+### parse_tululu_category.py
 Скрипт скачивает книги заданной категории. По умолчанию скачает книги из категории "Научная фантастика" с 1 по 5 страницу. 
 Так же, можно задать следующие настройки:
 
