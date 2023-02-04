@@ -9,6 +9,8 @@ from parse_tululu import check_for_redirect, download_txt, download_image, parse
 
 def parse_books_urls(response):
     soup = BeautifulSoup(response.text, 'lxml')
+    #books_select = '#content .bookimage a'
+    #books = soup.select(books_select)
     books = soup.find('div', id='content').find_all('table')
     one_page_books_urls = list()
     for book in books:
@@ -25,19 +27,20 @@ if __name__ == '__main__':
     img_folder = 'images'
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--first_page', type=int, default=1, help='Первая страница для скачивания')
-    parser.add_argument('--last_page', type=int, default=5, help='Последняя страница для скачивания')
+    parser.add_argument('--first_page', type=int, default=1,
+                        help='Первая страница для скачивания')
+    parser.add_argument('--last_page', type=int, default=5,
+                        help='Последняя страница для скачивания')
     parser.add_argument('--books_category', type=int, default=55,
-                        help='Категория подборки книг'
-                        )
+                        help='Категория подборки книг')
     parser.add_argument('--dest_folder', type=str, default="",
-                        help='Путь к каталогу с результатами парсинга'
-                        )
-    parser.add_argument('--skip_img', action='store_true', help='Не скачивать картинки')
-    parser.add_argument('--skip_txt', action='store_true', help='Не скачивать книги')
+                        help='Путь к каталогу с результатами парсинга')
+    parser.add_argument('--skip_img', action='store_true',
+                        help='Не скачивать картинки')
+    parser.add_argument('--skip_txt', action='store_true',
+                        help='Не скачивать книги')
     parser.add_argument('--json_path', type=str, default='books.json',
-                        help='Путь к *.json файлу с результатами'
-                        )
+                        help='Путь к *.json файлу с результатами')
     args = parser.parse_args()
 
     first_page = args.first_page
@@ -50,10 +53,7 @@ if __name__ == '__main__':
 
     books_urls = list()
     for page_number in range(first_page, last_page + 1):
-        new_page_url = urljoin(books_url, '/l{}/{}'.format(
-            books_category,
-            page_number
-        ))
+        new_page_url = urljoin(books_url, f'/l{books_category}/{page_number}')
         try:
             response = requests.get(new_page_url)
             response.raise_for_status()
