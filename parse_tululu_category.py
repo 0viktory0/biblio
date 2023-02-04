@@ -80,8 +80,10 @@ if __name__ == '__main__':
             response.raise_for_status()
             check_for_redirect(response)
             book = parse_book_page(response)
-            book_path = download_txt(book_txt_url, book_id, book['book_name'], book_folder)
-            img_path = download_image(book['book_img'], img_folder)
+            if not skip_txt:
+                book_path = download_txt(book_txt_url, book_id, book['book_name'], book_folder)
+            if not skip_img:
+                img_path = download_image(book['book_img'], img_folder)
 
         except (requests.HTTPError) as e:
             print('Книга с id = {}, не найдена '.format(book_id))
