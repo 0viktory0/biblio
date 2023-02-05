@@ -9,8 +9,6 @@ from parse_tululu import check_for_redirect, download_txt, download_image, parse
 
 def parse_books_urls(response):
     soup = BeautifulSoup(response.text, 'lxml')
-    #books_select = '#content .bookimage a'
-    #books = soup.select(books_select)
     books = soup.find('div', id='content').find_all('table')
     one_page_books_urls = list()
     for book in books:
