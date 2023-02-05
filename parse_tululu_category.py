@@ -70,7 +70,7 @@ if __name__ == '__main__':
             time.sleep(10)
             continue
 
-    book_description = []
+    books_description = []
     for book_url in books_urls:
         book_id = urlparse(book_url).path.replace('/', '').replace('b', '')
         book_txt_url = urljoin(books_url, 'txt.php')
@@ -94,7 +94,7 @@ if __name__ == '__main__':
             time.sleep(10)
             continue
 
-        book_description.append({
+        books_description.append({
             'title': book['book_name'],
             'author': book['author'],
             'img_src': img_path,
