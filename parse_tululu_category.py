@@ -27,7 +27,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--first_page', type=int, default=1,
                         help='Первая страница для скачивания')
-    parser.add_argument('--last_page', type=int, default=5,
+    parser.add_argument('--last_page', type=int, default=1,
                         help='Последняя страница для скачивания')
     parser.add_argument('--books_category', type=int, default=55,
                         help='Категория подборки книг')
@@ -94,7 +94,7 @@ if __name__ == '__main__':
 
         books_description.append({
             'title': book['book_name'],
-            'author': book['author'],
+            'Author': book['author'],
             'img_src': img_path,
             'book_path': book_path,
             'comments': book['comments'],
