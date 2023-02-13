@@ -12,9 +12,7 @@ def on_reload():
     os.makedirs('./pages', exist_ok=True)
 
     with open("books_description.json", encoding="utf-8") as my_file:
-        books_json = my_file.read()
-
-    books = json.loads(books_json)
+        books = json.load(my_file)
 
     env = Environment(
         loader=FileSystemLoader('./'),
