@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 from http.server import HTTPServer, SimpleHTTPRequestHandler
@@ -8,10 +9,10 @@ from more_itertools import chunked
 from pathlib import Path
 
 
-def on_reload():
+def on_reload(json_file_path):
     os.makedirs('./pages', exist_ok=True)
 
-    with open('books_description.json', encoding='utf-8') as my_file:
+    with open(json_file_path, encoding='utf-8') as my_file:
         books_description = json.load(my_file)
 
     env = Environment(
@@ -39,7 +40,13 @@ def on_reload():
 
 
 if __name__ == '__main__':
-    on_reload()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--json_path', type=str, default='books_description.json',
+                        help='Путь к *.json файлу с результатами')
+    args = parser.parse_args()
+    json_file_path = args.json_path
+
+    on_reload(json_file_path)
 
     server = Server()
     server.watch('./template.html', on_reload)
