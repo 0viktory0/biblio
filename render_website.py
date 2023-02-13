@@ -12,23 +12,23 @@ def on_reload():
     os.makedirs('./pages', exist_ok=True)
 
     with open('books_description.json', encoding='utf-8') as my_file:
-        books = json.load(my_file)
+        books_description = json.load(my_file)
 
     env = Environment(
         loader=FileSystemLoader('./'),
         autoescape=select_autoescape(['html', 'xml'])
     )
 
-    books_on_pages = 20
+    cards_on_pages = 20
     columns = 2
-    books_pages = list(chunked(books, books_on_pages))
-    for num, books_on_page in enumerate(books_pages, 1):
-        grouped_books = list(chunked(books_on_page, columns))
+    chuncked_books = list(chunked(books_description, cards_on_pages))
+    for num, cards_on_pages in enumerate(chuncked_books, 1):
+        grouped_books = list(chunked(cards_on_pages, columns))
         template = env.get_template('template.html')
         rendered_page = template.render(
             number_of_page=num,
             grouped_books=grouped_books,
-            pages_count=len(books_pages)
+            pages_count=len(chuncked_books)
         )
         with open(
                 Path.cwd() / 'pages' / f'index{num}.html',
