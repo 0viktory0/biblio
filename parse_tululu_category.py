@@ -101,7 +101,7 @@ if __name__ == '__main__':
             'genres': book['genres'],
         })
 
-    with open(json_file_path, "w", encoding="utf-8") as file:
+    with open(json_file_path, 'w', encoding='utf-8') as file:
         json.dump(books_description,
                   file,
                   ensure_ascii=False,
