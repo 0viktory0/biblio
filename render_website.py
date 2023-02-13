@@ -11,6 +11,7 @@ from pathlib import Path
 
 def on_reload(json_file_path):
     os.makedirs('./pages', exist_ok=True)
+    path = 'pages'
 
     with open(json_file_path, encoding='utf-8') as my_file:
         books_description = json.load(my_file)
@@ -32,9 +33,7 @@ def on_reload(json_file_path):
             pages_count=len(chuncked_books)
         )
         with open(
-                Path.cwd() / 'pages' / f'index{num}.html',
-                'w',
-                encoding='utf8',
+                os.path.join(path, f'index{num}.html'), 'w', encoding='utf8'
         ) as file:
             file.write(rendered_page)
 
