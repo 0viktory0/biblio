@@ -11,7 +11,7 @@ from pathlib import Path
 def on_reload():
     os.makedirs('./pages', exist_ok=True)
 
-    with open("books_description.json", encoding="utf-8") as my_file:
+    with open('books_description.json', encoding='utf-8') as my_file:
         books = json.load(my_file)
 
     env = Environment(
@@ -20,9 +20,10 @@ def on_reload():
     )
 
     books_on_pages = 20
+    columns = 2
     books_pages = list(chunked(books, books_on_pages))
     for num, books_on_page in enumerate(books_pages, 1):
-        grouped_books = list(chunked(books_on_page, 2))
+        grouped_books = list(chunked(books_on_page, columns))
         template = env.get_template('template.html')
         rendered_page = template.render(
             number_of_page=num,
@@ -32,7 +33,7 @@ def on_reload():
         with open(
                 Path.cwd() / 'pages' / f'index{num}.html',
                 'w',
-                encoding="utf8",
+                encoding='utf8',
         ) as file:
             file.write(rendered_page)
 
