@@ -37,7 +37,16 @@ $ python parse_tululu.py --start_id=3 --end_id=10
 ### render_website.py
 Скрипт для создания собственной электронной библиотеки.
 Создает готовые web-страницы с книгами, по 20 книг на странице с возможностью чтения.
-Для создания используется сгенерированный файл `books.json`.<br>
+Для создания используется сгенерированный файл `books_description.json`.<br>
+Пример запуска скрипта:
+```
+$ python render_website.py
+[I 230213 20:39:18 server:335] Serving on http://127.0.0.1:5500
+[I 230213 20:39:18 handlers:62] Start watching changes
+[I 230213 20:39:18 handlers:64] Start detecting changes
+[I 230213 20:39:30 handlers:135] Browser Connected: http://127.0.0.1:5500/
+
+```
 Сайт можно запустить локально по адресу `http://127.0.0.1:5500/pages/index1.html`.
 
 ## Цель проекта
