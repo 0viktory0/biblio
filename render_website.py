@@ -13,7 +13,7 @@ def on_reload(json_file_path):
     path = 'pages'
     os.makedirs(path, exist_ok=True)
 
-    with open(json_file_path, encoding='utf8') as file:
+    with open(json_file_path) as file:
         books_description = json.load(file)
 
     env = Environment(
