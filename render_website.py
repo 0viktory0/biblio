@@ -17,7 +17,7 @@ def on_reload(json_file_path):
         books_description = json.load(file)
 
     env = Environment(
-        loader=FileSystemLoader('.'),
+        loader=('.'),
         autoescape=select_autoescape(['html', 'xml'])
     )
 
@@ -26,15 +26,15 @@ def on_reload(json_file_path):
     number_of_pages = ceil(len(books_description) / cards_on_pages)
     chuncked_books = list(chunked(books_description, cards_on_pages))
     last_page = len(chuncked_books) - 1
-    for num, books in enumerate(chuncked_books, 1):
-        grouped_books = list(chunked(books, rows_on_page))
+    for num, book_cards in enumerate(chuncked_books, 1):
+        grouped_cards = list(chunked(book_cards, rows_on_page))
         template = env.get_template('template.html')
         page_path = os.path.join(
             path,
             f'index{num}.html')
 
         rendered_page = template.render(
-            chuncked_books=grouped_books,
+            chuncked_books=grouped_cards,
             number_of_pages=number_of_pages,
             current_page_number=num,
             last_page=last_page
