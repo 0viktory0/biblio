@@ -9,7 +9,13 @@ from more_itertools import chunked
 from math import ceil
 
 
-def on_reload(json_file_path):
+def on_reload():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--json_path', type=str, default='books_description.json',
+                        help='Путь к *.json файлу с результатами')
+    args = parser.parse_args()
+    json_file_path = args.json_path
+
     path = 'pages'
     os.makedirs(path, exist_ok=True)
 
@@ -43,14 +49,8 @@ def on_reload(json_file_path):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--json_path', type=str, default='books_description.json',
-                        help='Путь к *.json файлу с результатами')
-    args = parser.parse_args()
-    json_file_path = args.json_path
-
-    on_reload(json_file_path)
+    on_reload()
 
     server = Server()
-    server.watch('./template.html', on_reload)
+    server.watch('template.html', on_reload)
     server.serve(root='.', default_filename='pages/index1.html')
