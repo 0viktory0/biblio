@@ -1,5 +1,6 @@
 import argparse
 import json
+import os.path
 import requests
 import time
 from bs4 import BeautifulSoup
@@ -96,12 +97,12 @@ if __name__ == '__main__':
             'title': book['book_name'],
             'author': book['author'],
             'img_src': img_path,
-            'book_path': book_path,
+            'book_path': os.path.relpath(book_path),
             'comments': book['comments'],
             'genres': book['genres'],
         })
 
-    with open(json_file_path, 'w', encoding='utf-8') as file:
+    with open(json_file_path, 'w', encoding='utf-8', errors='ignore') as file:
         json.dump(books_description,
                   file,
                   ensure_ascii=False,

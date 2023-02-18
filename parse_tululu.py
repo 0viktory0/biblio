@@ -2,6 +2,7 @@ import argparse
 import os
 import requests
 import time
+from pathlib import Path
 from bs4 import BeautifulSoup
 from pathvalidate import sanitize_filename
 from urllib.parse import urljoin, urlsplit
@@ -12,11 +13,11 @@ def download_txt(book_txt_url, book_id, file_name, folder):
     response = requests.get(book_txt_url, params={'id': book_id})
     response.raise_for_status()
     check_for_redirect(response)
-    sanitized_filename = sanitize_filename(f'{file_name}_{book_id}')
-    file_extension = '.txt'
-    book_path = os.path.join(folder, f'{sanitized_filename}{file_extension}')
-    with open(book_path, 'w') as file:
-        file.write(response.text)
+    book_name = sanitize_filename(file_name)
+    book_path = Path.cwd() / f'books/{book_id}. {book_name}.txt'
+    print(book_path)
+    with open(book_path, 'wb') as file:
+        file.write(response.content)
     return book_path
 
 
