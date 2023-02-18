@@ -27,7 +27,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--first_page', type=int, default=1,
                         help='Первая страница для скачивания')
-    parser.add_argument('--last_page', type=int, default=1,
+    parser.add_argument('--last_page', type=int, default=10,
                         help='Последняя страница для скачивания')
     parser.add_argument('--books_category', type=int, default=55,
                         help='Категория подборки книг')
@@ -37,7 +37,7 @@ if __name__ == '__main__':
                         help='Не скачивать картинки')
     parser.add_argument('--skip_txt', action='store_true',
                         help='Не скачивать книги')
-    parser.add_argument('--json_path', type=str, default='books.json',
+    parser.add_argument('--json_path', type=str, default='books_description.json',
                         help='Путь к *.json файлу с результатами')
     args = parser.parse_args()
 
@@ -94,7 +94,7 @@ if __name__ == '__main__':
 
         books_description.append({
             'title': book['book_name'],
-            'Author': book['author'],
+            'author': book['author'],
             'img_src': img_path,
             'book_path': book_path,
             'comments': book['comments'],
