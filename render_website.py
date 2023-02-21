@@ -30,9 +30,9 @@ def on_reload():
     cards_on_pages = 20
     rows_on_page = 10
     number_of_pages = ceil(len(books_description) / cards_on_pages)
-    chuncked_books = list(chunked(books_description, cards_on_pages))
-    last_page = len(chuncked_books) - 1
-    for num, book_cards in enumerate(chuncked_books, 1):
+    chuncked_cards = list(chunked(books_description, cards_on_pages))
+    last_page = len(chuncked_cards) - 1
+    for num, book_cards in enumerate(chuncked_cards, 1):
         grouped_cards = list(chunked(book_cards, rows_on_page))
         template = env.get_template('template.html')
         page_path = os.path.join(path, f'index{num}.html')
